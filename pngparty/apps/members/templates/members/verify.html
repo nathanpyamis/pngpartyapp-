@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Membership verification</title>
+<style>
+  body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #f4f4f4; color: #111; }
+  .wrap { max-width: 420px; margin: 0 auto; padding: 24px 16px; }
+  .box { background: #fff; border-radius: 10px; padding: 20px; border-top: 6px solid #999; }
+  .ok { border-top-color: #1a7f37; } .bad { border-top-color: #C8102E; }
+  .status { font-size: 1.3rem; font-weight: 700; margin: 0 0 12px; }
+  .ok .status { color: #1a7f37; } .bad .status { color: #C8102E; }
+  img { width: 120px; height: 120px; object-fit: cover; border-radius: 6px; display: block; margin-bottom: 12px; }
+  dl { margin: 0; } dt { font-size: .75rem; color: #666; text-transform: uppercase; margin-top: 10px; }
+  dd { margin: 2px 0 0; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  {% if valid %}
+  <div class="box ok">
+    <p class="status">✔ Valid PNG Party member</p>
+    {% if member.photo %}<img src="{{ member.photo.url }}" alt="Member photo">{% endif %}
+    <dl>
+      <dt>Name</dt><dd>{{ member.full_name }}</dd>
+      <dt>Membership No.</dt><dd>{{ member.membership_number }}</dd>
+      <dt>Electorate</dt><dd>{{ member.electorate.name }}, {{ member.electorate.province.name }}</dd>
+      <dt>Member since</dt><dd>{{ member.verified_at|date:"d M Y" }}</dd>
+    </dl>
+  </div>
+  {% else %}
+  <div class="box bad">
+    <p class="status">✖ Card not valid</p>
+    <p>This card does not match a verified party member. Contact the provincial office.</p>
+  </div>
+  {% endif %}
+</div>
+</body>
+</html>

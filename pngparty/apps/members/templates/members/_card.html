@@ -1,0 +1,31 @@
+<div class="band">
+  <div class="party">PAPUA NEW GUINEA PARTY</div>
+  <div class="sub">OFFICIAL MEMBERSHIP CARD</div>
+  <div class="tag">MEMBER</div>
+</div>
+
+<div class="photo">
+  {% if card.photo %}<img src="{{ card.photo }}" alt="">{% else %}<div class="nophoto">NO PHOTO</div>{% endif %}
+</div>
+
+<div class="details">
+  <div class="name">{{ card.m.full_name }}</div>
+  <div class="row">
+    <div class="label">Membership No.</div>
+    <div class="value mono">{{ card.m.membership_number }}</div>
+  </div>
+  <div class="row">
+    <div class="label">Electorate</div>
+    <div class="value">{{ card.m.electorate.name }}</div>
+  </div>
+  <div class="row">
+    <div class="label">Province</div>
+    <div class="value">{{ card.province.name }}</div>
+  </div>
+</div>
+
+<div class="qr"><img src="{{ card.qr }}" alt=""></div>
+<div class="qr-cap">Scan to verify</div>
+
+<div class="issued">Issued {{ card.issued|date:"d M Y" }}</div>
+<div class="stripe"></div>

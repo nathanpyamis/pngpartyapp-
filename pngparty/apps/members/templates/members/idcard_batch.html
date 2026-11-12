@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Member cards — A4</title>
+{% include "members/_card_styles.html" %}
+<style>
+  /* Positions are computed in idcards.batch_positions() and centred on A4.
+     Print at 100% / "Actual size": never "Fit to page", or cards shrink. */
+  @page { size: A4; margin: 0; }
+  .sheet { position: relative; width: 210mm; height: 297mm; page-break-after: always; }
+  .sheet:last-child { page-break-after: auto; }
+  .sheet .card { position: absolute; outline: 0.2mm dashed #9a9a9a; }
+  .sheet .footer {
+    position: absolute; left: 0; bottom: 4mm; width: 100%;
+    text-align: center; font-size: 6pt; color: #888;
+  }
+</style>
+</head>
+<body>
+{% for page in pages %}
+  <div class="sheet">
+    {% for card in page %}
+      <div class="card" style="left: {{ card.left }}mm; top: {{ card.top }}mm;">
+        {% include "members/_card.html" %}
+      </div>
+    {% endfor %}
+    <div class="footer">PNG Party — member cards — sheet {{ forloop.counter }} of {{ pages|length }} — cut along dashed lines</div>
+  </div>
+{% endfor %}
+</body>
+</html>

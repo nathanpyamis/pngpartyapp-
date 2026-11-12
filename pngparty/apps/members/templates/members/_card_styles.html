@@ -1,0 +1,63 @@
+<style>
+  /* Brand tokens: swap for the party's official colours/logo. */
+  :root {
+    --ink: #111111;
+    --red: #C8102E;
+    --gold: #F2B705;
+    --paper: #ffffff;
+    --muted: #555555;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "DejaVu Sans", "Liberation Sans", Arial, sans-serif; color: var(--ink); }
+
+  .card {
+    width: 85.6mm; height: 54mm;
+    position: relative; overflow: hidden;
+    background: var(--paper);
+  }
+  .card .band {
+    position: absolute; left: 0; top: 0; width: 100%; height: 10.5mm;
+    background: var(--ink); color: var(--gold);
+    padding: 1.6mm 3mm 0 3mm;
+  }
+  .card .band .party { font-size: 7.5pt; font-weight: bold; letter-spacing: 0.3pt; }
+  .card .band .sub   { font-size: 5pt; color: #ffffff; letter-spacing: 1.2pt; margin-top: 0.4mm; }
+  .card .band .tag {
+    position: absolute; right: 3mm; top: 2.6mm;
+    background: var(--red); color: #fff; font-size: 5.5pt; font-weight: bold;
+    padding: 0.8mm 1.8mm; border-radius: 0.8mm; letter-spacing: 0.8pt;
+  }
+
+  .card .photo {
+    position: absolute; left: 3mm; top: 13mm; width: 20mm; height: 25mm;
+    border: 0.3mm solid var(--ink); background: #e6e6e6;
+    overflow: hidden;
+  }
+  .card .photo img { width: 100%; height: 100%; object-fit: cover; }
+  .card .photo .nophoto {
+    font-size: 5pt; color: var(--muted); text-align: center; padding-top: 10mm;
+  }
+
+  .card .details { position: absolute; left: 25.5mm; top: 12.8mm; width: 36mm; }
+  .card .name {
+    font-size: 8pt; font-weight: bold; line-height: 1.15;
+    max-height: 7mm; overflow: hidden; text-transform: uppercase;
+  }
+  .card .row { margin-top: 1.3mm; }
+  .card .label { font-size: 4.5pt; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5pt; }
+  .card .value { font-size: 6.2pt; font-weight: bold; }
+  .card .value.mono { font-family: "DejaVu Sans Mono", monospace; font-size: 6.6pt; color: var(--red); }
+
+  .card .qr { position: absolute; right: 2.5mm; top: 13mm; width: 20mm; height: 20mm; }
+  .card .qr img { width: 100%; height: 100%; }
+  .card .qr-cap {
+    position: absolute; right: 2.5mm; top: 33.5mm; width: 20mm;
+    font-size: 4pt; text-align: center; color: var(--muted);
+  }
+
+  .card .issued { position: absolute; left: 3mm; bottom: 4.6mm; font-size: 4.8pt; color: var(--muted); }
+  .card .stripe {
+    position: absolute; left: 0; bottom: 0; width: 100%; height: 3mm;
+    background: var(--red); border-top: 0.6mm solid var(--gold);
+  }
+</style>

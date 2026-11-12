@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Member card</title>
+{% include "members/_card_styles.html" %}
+<style>
+  /* CR80 for PVC card printers: one card per page, no margins */
+  @page { size: 85.6mm 54mm; margin: 0; }
+  .card { page-break-after: always; }
+  .card:last-child { page-break-after: auto; }
+</style>
+</head>
+<body>
+{% for card in cards %}
+  <div class="card">{% include "members/_card.html" %}</div>
+{% endfor %}
+</body>
+</html>
