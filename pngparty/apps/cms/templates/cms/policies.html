@@ -1,0 +1,15 @@
+{% extends "cms/base.html" %}
+{% block title %}Policies · PNG Party{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>Policies</h1><p>Our plan, pillar by pillar.</p></div></div>
+<section><div class="wrap"><div class="grid">
+  {% for p in policies %}
+  <div class="card pillar">
+    <span class="tag">{{ p.get_pillar_display }}</span>
+    <h3>{{ p.title }}</h3>
+    <p>{{ p.summary }}</p>
+    {% if p.pdf %}<p style="margin-top:10px"><a href="{{ p.pdf.url }}">Download full policy (PDF)</a></p>{% endif %}
+  </div>
+  {% empty %}<p class="lede">Policies will be published soon.</p>{% endfor %}
+</div></div></section>
+{% endblock %}

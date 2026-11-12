@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}PNG Party{% endblock %}</title>
+<meta name="description" content="{% block description %}Papua New Guinea Party: policies, news and membership.{% endblock %}">
+<link rel="icon" href="/static/pwa/icons/icon-192.png">
+<style>
+  /* Same brand tokens as the ID card (_card_styles.html). */
+  :root {
+    --ink: #111111; --red: #C8102E; --gold: #F2B705;
+    --paper: #ffffff; --bg: #f6f5f2; --muted: #5c5c5c; --line: #e3e1dc;
+    --max: 1080px;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+         color: var(--ink); background: var(--bg); line-height: 1.55; }
+  a { color: var(--red); }
+  img { max-width: 100%; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+
+  header.site { background: var(--ink); color: #fff; position: sticky; top: 0; z-index: 10;
+                border-bottom: 4px solid var(--gold); }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between;
+                      gap: 12px; min-height: 60px; flex-wrap: wrap; }
+  .brand { color: var(--gold); text-decoration: none; font-weight: 800; letter-spacing: .5px;
+           display: flex; align-items: center; gap: 10px; }
+  .brand img { width: 34px; height: 34px; border-radius: 6px; }
+  nav.main { display: flex; gap: 4px; flex-wrap: wrap; }
+  nav.main a { color: #fff; text-decoration: none; padding: 8px 10px; border-radius: 6px; font-size: .95rem; }
+  nav.main a:hover, nav.main a.on { background: rgba(255,255,255,.12); }
+  nav.main a.cta { background: var(--red); font-weight: 700; }
+  nav.main a.cta:hover { background: #a50d26; }
+
+  .hero { background: linear-gradient(135deg, var(--ink) 0%, #2a0a10 60%, var(--red) 140%);
+          color: #fff; padding: 64px 0 56px; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; margin: 0 0 14px; max-width: 16ch; }
+  .hero h1 span { color: var(--gold); }
+  .hero p { font-size: 1.15rem; max-width: 52ch; opacity: .9; margin: 0 0 24px; }
+  .btn { display: inline-block; padding: 12px 20px; border-radius: 8px; font-weight: 700;
+         text-decoration: none; border: 2px solid transparent; }
+  .btn.primary { background: var(--gold); color: var(--ink); }
+  .btn.ghost { border-color: rgba(255,255,255,.6); color: #fff; margin-left: 8px; }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px;
+           margin-top: -28px; position: relative; }
+  .stat { background: var(--paper); border-radius: 10px; padding: 16px 18px;
+          box-shadow: 0 2px 10px rgba(0,0,0,.06); border-top: 4px solid var(--red); }
+  .stat b { display: block; font-size: 1.8rem; line-height: 1.1; }
+  .stat span { color: var(--muted); font-size: .9rem; }
+
+  section { padding: 48px 0; }
+  section h2 { font-size: 1.6rem; margin: 0 0 6px; }
+  .lede { color: var(--muted); margin: 0 0 24px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .card { background: var(--paper); border-radius: 10px; padding: 20px; border: 1px solid var(--line); }
+  .card h3 { margin: 6px 0 8px; font-size: 1.1rem; }
+  .card h3 a { color: inherit; text-decoration: none; }
+  .card h3 a:hover { color: var(--red); }
+  .card p { margin: 0; color: var(--muted); }
+  .tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .6px;
+         text-transform: uppercase; color: var(--red); }
+  .meta { font-size: .85rem; color: var(--muted); }
+  .pillar { border-left: 4px solid var(--gold); }
+
+  .page-head { background: var(--ink); color: #fff; padding: 36px 0 30px; }
+  .page-head h1 { margin: 0; font-size: clamp(1.7rem, 4vw, 2.4rem); }
+  .page-head p { margin: 6px 0 0; opacity: .8; }
+  .prose { background: var(--paper); border-radius: 10px; padding: 24px; border: 1px solid var(--line);
+           max-width: 72ch; }
+  .prose p { margin: 0 0 1em; }
+  .steps { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .steps li { background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+              padding: 16px 16px 16px 60px; position: relative; }
+  .steps li::before { counter-increment: s; content: counter(s); position: absolute; left: 16px; top: 14px;
+                      width: 30px; height: 30px; border-radius: 50%; background: var(--red); color: #fff;
+                      font-weight: 700; display: grid; place-items: center; }
+  table { width: 100%; border-collapse: collapse; background: var(--paper); border-radius: 10px; overflow: hidden; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font-size: .8rem; text-transform: uppercase; color: var(--muted); letter-spacing: .5px; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  footer.site { background: var(--ink); color: #bbb; padding: 28px 0; margin-top: 32px; font-size: .9rem;
+                border-top: 4px solid var(--red); }
+  footer.site a { color: var(--gold); }
+  .draft { background: var(--gold); color: var(--ink); text-align: center; font-size: .8rem; padding: 4px 16px; }
+</style>
+</head>
+<body>
+<div class="draft">Draft website with sample content</div>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="{% url 'cms:home' %}"><img src="/static/pwa/icons/icon-192.png" alt=""> PNG PARTY</a>
+    {% with u=request.resolver_match.url_name %}
+    <nav class="main">
+      <a href="{% url 'cms:home' %}" {% if u == 'home' %}class="on"{% endif %}>Home</a>
+      <a href="{% url 'cms:about' %}" {% if u == 'about' %}class="on"{% endif %}>About</a>
+      <a href="{% url 'cms:policies' %}" {% if u == 'policies' %}class="on"{% endif %}>Policies</a>
+      <a href="{% url 'cms:news_list' %}" {% if u == 'news_list' or u == 'news_detail' %}class="on"{% endif %}>News</a>
+      <a class="cta" href="{% url 'cms:join' %}">Join</a>
+    </nav>
+    {% endwith %}
+  </div>
+</header>
+<main>{% block content %}{% endblock %}</main>
+<footer class="site">
+  <div class="wrap">
+    <p>© {% now "Y" %} Papua New Guinea Party. Membership cards can be checked by scanning their QR code.</p>
+    <p><a href="/agent/">Field agent app</a> · <a href="/admin/">Coordinator login</a></p>
+  </div>
+</footer>
+</body>
+</html>

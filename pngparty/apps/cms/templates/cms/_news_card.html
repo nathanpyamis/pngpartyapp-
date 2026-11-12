@@ -1,0 +1,6 @@
+<article class="card">
+  <span class="tag">{{ n.get_kind_display }}</span>
+  <h3><a href="{% url 'cms:news_detail' n.slug %}">{{ n.title }}</a></h3>
+  <p>{{ n.summary }}</p>
+  <p class="meta" style="margin-top:10px">{{ n.published_at|date:"j F Y" }}</p>
+</article>

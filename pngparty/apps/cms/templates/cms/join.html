@@ -1,0 +1,25 @@
+{% extends "cms/base.html" %}
+{% block title %}Join · PNG Party{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>Join the party</h1><p>Membership is open to citizens in every province.</p></div></div>
+<section><div class="wrap">
+  <h2>How to join</h2>
+  <p class="lede">Online sign-up is coming soon. For now, register with a field agent.</p>
+  <ol class="steps">
+    <li><strong>Meet a field agent</strong> in your ward or at a party event. Bring your NID card if you have one.</li>
+    <li><strong>The agent registers you</strong> on their phone and takes your photo. This works with no signal.</li>
+    <li><strong>Your provincial coordinator checks</strong> the registration and gives you a membership number.</li>
+    <li><strong>Collect your card.</strong> Its QR code lets anyone confirm you are a verified member.</li>
+  </ol>
+</div></section>
+<section style="padding-top:0"><div class="wrap">
+  <h2>Members by province</h2>
+  <p class="lede">Verified members so far.</p>
+  <table>
+    <thead><tr><th>Province</th><th>Region</th><th style="text-align:right">Members</th></tr></thead>
+    <tbody>
+    {% for p in provinces %}<tr><td>{{ p.name }}</td><td>{{ p.get_region_display }}</td><td class="num">{{ p.members }}</td></tr>{% endfor %}
+    </tbody>
+  </table>
+</div></section>
+{% endblock %}

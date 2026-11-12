@@ -1,0 +1,46 @@
+{% extends "cms/base.html" %}
+{% block content %}
+<div class="hero">
+  <div class="wrap">
+    <h1>A stronger <span>Papua New Guinea</span>, built in every village</h1>
+    <p>Join a party that registers members in every province, even where there is no signal.</p>
+    <a class="btn primary" href="{% url 'cms:join' %}">Become a member</a>
+    <a class="btn ghost" href="{% url 'cms:policies' %}">Our policies</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><b>{{ verified_members }}</b><span>verified members</span></div>
+    <div class="stat"><b>{{ provinces_active }} / 22</b><span>provinces with members</span></div>
+    <div class="stat"><b>{{ policies|length }}</b><span>policy pillars</span></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Our policy pillars</h2>
+    <p class="lede">What we will deliver for families, farmers and businesses.</p>
+    <div class="grid">
+      {% for p in policies %}
+      <div class="card pillar">
+        <span class="tag">{{ p.get_pillar_display }}</span>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.summary }}</p>
+      </div>
+      {% empty %}<p class="lede">Policies will be published soon.</p>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Latest news</h2>
+    <p class="lede"><a href="{% url 'cms:news_list' %}">All news and press releases →</a></p>
+    <div class="grid">
+      {% for n in news %}{% include "cms/_news_card.html" %}
+      {% empty %}<p class="lede">No news yet.</p>{% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

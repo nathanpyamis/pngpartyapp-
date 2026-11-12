@@ -1,0 +1,8 @@
+{% extends "cms/base.html" %}
+{% block title %}News · PNG Party{% endblock %}
+{% block content %}
+<div class="page-head"><div class="wrap"><h1>News</h1><p>News, press releases and rally updates.</p></div></div>
+<section><div class="wrap"><div class="grid">
+  {% for n in news %}{% include "cms/_news_card.html" %}{% empty %}<p class="lede">No news yet.</p>{% endfor %}
+</div></div></section>
+{% endblock %}
